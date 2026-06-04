@@ -3,94 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Franklin Lima | 40 Anos</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: #000;
       color: #fff;
-      font-family: Montserrat, sans-serif;
+      font-family: "Montserrat", sans-serif;
       overflow-x: hidden;
     }
 
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* TELA INICIAL DA CARTA */
     .intro {
       position: fixed;
       inset: 0;
-      z-index: 20;
+      z-index: 999;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 18px;
       background:
-        radial-gradient(circle at top, rgba(255,255,255,.25), transparent 25%),
-        linear-gradient(135deg, #000, #111, #d7d7d7, #050505, #000);
-      transition: 1s;
+        radial-gradient(circle at 50% 5%, rgba(255,255,255,0.22), transparent 25%),
+        radial-gradient(circle at 10% 35%, rgba(255,255,255,0.12), transparent 20%),
+        radial-gradient(circle at 90% 30%, rgba(255,255,255,0.10), transparent 20%),
+        linear-gradient(135deg, #000 0%, #101010 34%, #d8d8d8 50%, #101010 66%, #000 100%);
+      transition: opacity 1s ease, visibility 1s ease, transform 1s ease;
+      overflow: hidden;
     }
 
     .intro.hide {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: scale(1.05);
+      transform: scale(1.06);
+    }
+
+    .party-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.75;
     }
 
     .spark {
       position: absolute;
-      width: 6px;
-      height: 6px;
+      top: -20px;
+      left: var(--left);
+      width: var(--size);
+      height: var(--size);
       border-radius: 50%;
-      background: white;
-      opacity: .7;
-      animation: fall 8s linear infinite;
+      background: radial-gradient(circle, #fff, rgba(255,255,255,0.35), transparent);
+      animation: fall var(--time) linear infinite;
+      animation-delay: var(--delay);
     }
 
     @keyframes fall {
-      from { transform: translateY(-100px); }
-      to { transform: translateY(110vh); opacity: 0; }
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(115vh) translateX(var(--move)) rotate(360deg);
+        opacity: 0;
+      }
     }
 
-    .spark:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .spark:nth-child(2) { left: 25%; animation-delay: 2s; }
-    .spark:nth-child(3) { left: 45%; animation-delay: 4s; }
-    .spark:nth-child(4) { left: 70%; animation-delay: 1s; }
-    .spark:nth-child(5) { left: 88%; animation-delay: 3s; }
-
-    .envelope-stage {
-      width: min(90vw, 430px);
-      text-align: center;
+    .intro-content {
+      position: relative;
       z-index: 2;
+      width: min(92vw, 460px);
+      text-align: center;
+    }
+
+    .intro-title {
+      font-family: "Cinzel", serif;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.82rem;
+      margin-bottom: 28px;
     }
 
     .envelope {
+      width: 100%;
+      height: 270px;
       position: relative;
-      height: 260px;
       cursor: pointer;
       perspective: 1000px;
-      filter: drop-shadow(0 30px 45px rgba(0,0,0,.8));
+      filter: drop-shadow(0 30px 46px rgba(0,0,0,0.85));
     }
 
     .envelope-body {
       position: absolute;
       inset: 0;
       border-radius: 18px;
-      background: linear-gradient(145deg, #151515, #000);
-      border: 1px solid rgba(255,255,255,.3);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), transparent 25%),
+        linear-gradient(160deg, #171717, #020202 72%);
+      border: 1px solid rgba(255,255,255,0.30);
       overflow: hidden;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        inset 0 18px 42px rgba(255,255,255,0.05),
+        0 0 48px rgba(255,255,255,0.12);
+    }
+
+    .envelope-body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(40deg, transparent 49%, rgba(255,255,255,0.23) 50%, transparent 51%),
+        linear-gradient(-40deg, transparent 49%, rgba(255,255,255,0.16) 50%, transparent 51%);
+      opacity: 0.9;
+    }
+
+    .envelope-body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+      background: linear-gradient(to top, rgba(255,255,255,0.10), transparent);
     }
 
     .flap {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 62%;
-      background: linear-gradient(180deg, #222, #030303);
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top;
-      transition: transform 1s ease;
-      border-radius: 18px 18px 0 0;
       z-index: 4;
+      transform-origin: top center;
+      transition: transform 1.05s cubic-bezier(.25,.9,.25,1);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(180deg, #202020, #020202);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 18px 18px 0 0;
     }
 
     .envelope.open .flap {
@@ -101,54 +182,72 @@
       position: absolute;
       left: 50%;
       top: 52%;
-      width: 115px;
-      height: 115px;
+      width: 116px;
+      height: 116px;
       transform: translate(-50%, -50%);
+      z-index: 8;
       border-radius: 50%;
-      background: #000;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255,255,255,.5);
-      z-index: 5;
-      transition: .8s;
-      box-shadow: 0 0 35px rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 35% 25%, rgba(255,255,255,0.35), transparent 24%),
+        linear-gradient(145deg, #0d0d0d, #000);
+      border: 1px solid rgba(255,255,255,0.55);
+      box-shadow:
+        0 0 0 8px rgba(255,255,255,0.04),
+        0 0 40px rgba(255,255,255,0.18);
+      transition: opacity 0.75s ease, transform 0.75s ease;
     }
 
     .seal img {
       width: 90px;
       height: 90px;
-      border-radius: 50%;
       object-fit: cover;
+      border-radius: 50%;
+      filter: brightness(1.1) contrast(1.08);
     }
 
     .envelope.open .seal {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(.7);
+      transform: translate(-50%, -50%) scale(0.62) rotate(22deg);
     }
 
     .open-text {
-      margin-top: 28px;
+      margin-top: 30px;
+      font-family: "Cinzel", serif;
       text-transform: uppercase;
-      letter-spacing: .22em;
-      font-size: .8rem;
-      color: rgba(255,255,255,.85);
-      animation: pulse 1.6s infinite;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.86);
+      font-size: 0.78rem;
+      animation: pulseText 1.7s ease-in-out infinite;
+      cursor: pointer;
     }
 
-    @keyframes pulse {
-      50% { opacity: .45; }
+    @keyframes pulseText {
+      0%, 100% {
+        opacity: 0.5;
+        transform: translateY(0);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
     }
 
+    /* SITE PRINCIPAL */
     .site {
+      min-height: 100vh;
       opacity: 0;
       visibility: hidden;
-      min-height: 100vh;
+      transition: opacity 1s ease, visibility 1s ease;
       background:
-        radial-gradient(circle at 15% 10%, rgba(255,255,255,.12), transparent 25%),
-        radial-gradient(circle at 85% 20%, rgba(255,255,255,.08), transparent 25%),
-        linear-gradient(#000, #060606, #000);
-      transition: 1s;
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), transparent 24%),
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.08), transparent 20%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.08), transparent 24%),
+        linear-gradient(180deg, #000, #070707 45%, #000);
       position: relative;
+      overflow: hidden;
     }
 
     .site.show {
@@ -156,12 +255,35 @@
       visibility: visible;
     }
 
+    .silver-particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.14) 0 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.08) 0 1px, transparent 1.4px);
+      background-size: 42px 42px, 78px 78px;
+      opacity: 0.45;
+      animation: drift 18s linear infinite;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-120px);
+      }
+    }
+
     .section {
-      width: min(1120px, 100%);
-      margin: auto;
-      padding: 80px 20px;
       position: relative;
       z-index: 2;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 76px 20px;
     }
 
     .hero {
@@ -169,150 +291,271 @@
       display: grid;
       place-items: center;
       text-align: center;
+      padding-top: 82px;
     }
 
     .brand-card {
-      width: min(92vw, 540px);
-      padding: 35px 22px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.055);
+      width: min(92vw, 560px);
+      border-radius: 30px;
+      padding: 34px 22px 40px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        rgba(0,0,0,0.58);
+      box-shadow:
+        0 0 80px rgba(255,255,255,0.08),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
       backdrop-filter: blur(12px);
-      box-shadow: 0 0 70px rgba(255,255,255,.08);
+      animation: enterUp 1s ease both;
+    }
+
+    @keyframes enterUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .brand-logo {
-      width: min(75vw, 320px);
+      width: min(72vw, 320px);
       border-radius: 18px;
-      margin-bottom: 22px;
+      display: block;
+      margin: 0 auto 24px;
+      filter: drop-shadow(0 22px 28px rgba(0,0,0,0.75));
     }
 
     .brand-name {
-      font-family: Cinzel, serif;
+      font-family: "Cinzel", serif;
       text-transform: uppercase;
-      letter-spacing: .18em;
-      font-size: clamp(2rem, 8vw, 4rem);
-      background: linear-gradient(100deg, #777, #fff, #aaa, #fff);
-      -webkit-background-clip: text;
+      font-weight: 500;
+      font-size: clamp(2rem, 8vw, 4.6rem);
+      line-height: 1.05;
+      letter-spacing: 0.18em;
       color: transparent;
+      background: linear-gradient(110deg, #777, #fff, #a8a8a8, #fff, #6f6f6f);
+      background-size: 260% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: silverText 5s ease-in-out infinite;
+    }
+
+    @keyframes silverText {
+      0%, 100% {
+        background-position: 0% center;
+      }
+
+      50% {
+        background-position: 100% center;
+      }
     }
 
     .age {
       margin-top: 10px;
-      font-family: Cinzel, serif;
-      letter-spacing: .45em;
-      color: rgba(255,255,255,.7);
+      font-family: "Cinzel", serif;
+      text-transform: uppercase;
+      letter-spacing: 0.45em;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.82rem;
+    }
+
+    .divider {
+      width: min(72%, 360px);
+      height: 1px;
+      margin: 32px auto 0;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.65), transparent);
+      position: relative;
+    }
+
+    .divider::after {
+      content: "✦";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #050505;
+      color: #fff;
+      padding: 0 14px;
+      font-size: 0.9rem;
     }
 
     .quote {
-      margin-top: 35px;
-      font-family: Cinzel, serif;
+      margin-top: 34px;
+      font-family: "Cinzel", serif;
       text-transform: uppercase;
       line-height: 1.6;
-      letter-spacing: .08em;
-      font-size: clamp(1.15rem, 5vw, 2rem);
+      letter-spacing: 0.08em;
+      font-size: clamp(1.15rem, 5vw, 2.15rem);
+      color: rgba(255,255,255,0.86);
     }
 
     .quote span {
       display: block;
       margin-top: 8px;
-      text-shadow: 0 0 22px rgba(255,255,255,.35);
+      color: #fff;
+      text-shadow: 0 0 26px rgba(255,255,255,0.35);
     }
 
+    /* CARROSSEL */
     .carousel-section {
-      padding-top: 30px;
+      padding-top: 20px;
     }
 
     .carousel-title {
       text-align: center;
-      font-family: Cinzel, serif;
-      letter-spacing: .22em;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.75);
-      margin-bottom: 25px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+
+    .carousel-shell {
+      position: relative;
+      width: min(100%, 980px);
+      margin: 0 auto;
+      border-radius: 30px;
+      padding: 8px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.08), rgba(255,255,255,0.42));
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.78),
+        0 0 58px rgba(255,255,255,0.08);
     }
 
     .carousel {
       display: flex;
-      gap: 18px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 12px 18px 28px;
+      scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      border-radius: 24px;
+      background: #050505;
     }
 
     .carousel::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .carousel::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,.35);
-      border-radius: 999px;
+      display: none;
     }
 
     .slide {
-      min-width: 82%;
+      min-width: 100%;
       scroll-snap-align: center;
-      border-radius: 28px;
-      padding: 7px;
-      background: linear-gradient(135deg, #fff, #555, #111, #ddd);
-      box-shadow: 0 30px 70px rgba(0,0,0,.75);
+      position: relative;
     }
 
     .slide img {
       width: 100%;
-      height: 430px;
+      height: 440px;
       object-fit: cover;
-      border-radius: 22px;
       display: block;
-      filter: brightness(.9) contrast(1.08);
+      border-radius: 24px;
+      filter: brightness(0.88) contrast(1.1) saturate(0.96);
     }
 
+    .slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.42), transparent 42%),
+        linear-gradient(to bottom, rgba(0,0,0,0.22), transparent 30%);
+      pointer-events: none;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .dot.active {
+      width: 28px;
+      background: rgba(255,255,255,0.9);
+    }
+
+    .swipe-hint {
+      margin-top: 18px;
+      text-align: center;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.72rem;
+    }
+
+    /* BOTÕES */
     .actions {
-      max-width: 650px;
-      margin: auto;
+      max-width: 680px;
+      margin: 0 auto;
       display: grid;
-      gap: 28px;
+      gap: 26px;
       padding-bottom: 90px;
     }
 
-    .lux-button, .lux-link {
+    .lux-button,
+    .lux-link {
       width: 100%;
-      min-height: 66px;
+      min-height: 68px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.28);
-      background: linear-gradient(145deg, #111, #000);
+      border: 1px solid rgba(255,255,255,0.28);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,0.18), transparent 32%),
+        linear-gradient(145deg, #101010, #000);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      gap: 12px;
+      gap: 13px;
+      padding: 18px 20px;
       text-decoration: none;
       cursor: pointer;
+      text-align: center;
       text-transform: uppercase;
-      letter-spacing: .12em;
+      letter-spacing: 0.12em;
       font-weight: 700;
-      padding: 18px;
-      box-shadow: 0 18px 45px rgba(0,0,0,.65);
-      transition: .25s;
+      box-shadow:
+        0 18px 42px rgba(0,0,0,0.58),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .lux-button:hover, .lux-link:hover {
+    .lux-button:hover,
+    .lux-link:hover {
       transform: translateY(-3px);
-      border-color: rgba(255,255,255,.7);
+      border-color: rgba(255,255,255,0.65);
+      box-shadow:
+        0 26px 54px rgba(0,0,0,0.72),
+        0 0 26px rgba(255,255,255,0.1);
     }
 
     .panel {
       display: grid;
       grid-template-rows: 0fr;
       opacity: 0;
-      transition: .7s;
+      transform: translateY(-10px);
+      transition: grid-template-rows 0.7s ease, opacity 0.7s ease, transform 0.7s ease;
     }
 
     .panel.open {
       grid-template-rows: 1fr;
       opacity: 1;
+      transform: translateY(0);
     }
 
     .panel-inner {
@@ -321,63 +564,182 @@
 
     .info-card {
       margin-top: 14px;
-      border-radius: 24px;
-      padding: 26px 20px;
+      border-radius: 26px;
+      padding: 28px 22px;
       text-align: center;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.055);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
     }
 
     .info-card h2 {
-      font-family: Cinzel, serif;
-      letter-spacing: .18em;
+      font-family: "Cinzel", serif;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      letter-spacing: 0.18em;
+      font-size: clamp(1.2rem, 5vw, 2rem);
+      margin-bottom: 12px;
     }
 
     .info-card p {
-      line-height: 1.7;
-      color: rgba(255,255,255,.8);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.75;
+      letter-spacing: 0.04em;
+      font-size: 0.98rem;
+    }
+
+    .confirm-box {
+      border-radius: 28px;
+      padding: 30px 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        rgba(0,0,0,0.48);
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.5),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
     }
 
     .confirm-text {
-      text-align: center;
-      font-family: Cinzel, serif;
-      letter-spacing: .1em;
-      line-height: 1.6;
+      font-family: "Cinzel", serif;
       text-transform: uppercase;
-      color: rgba(255,255,255,.82);
-      margin-bottom: 14px;
+      letter-spacing: 0.11em;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
     }
 
-    audio {
+    .gift-link {
+      margin-top: 14px;
+    }
+
+    .music-control {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.72);
+      color: #fff;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
       display: none;
+      align-items: center;
+      justify-content: center;
     }
 
-    @media (max-width: 520px) {
-      .envelope { height: 230px; }
-      .seal { width: 96px; height: 96px; }
-      .seal img { width: 75px; height: 75px; }
+    .site.show .music-control {
+      display: flex;
+    }
 
-      .slide {
-        min-width: 88%;
+    .footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 30px 20px 45px;
+      color: rgba(255,255,255,0.52);
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.14em;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    /* MOBILE */
+    @media (max-width: 540px) {
+      .intro-content {
+        width: min(94vw, 390px);
       }
 
-      .slide img {
-        height: 350px;
+      .envelope {
+        height: 230px;
+      }
+
+      .seal {
+        width: 96px;
+        height: 96px;
+      }
+
+      .seal img {
+        width: 74px;
+        height: 74px;
+      }
+
+      .open-text {
+        letter-spacing: 0.2em;
+        font-size: 0.72rem;
+      }
+
+      .section {
+        padding: 68px 16px;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .brand-card {
+        padding: 28px 18px 34px;
+        border-radius: 24px;
+      }
+
+      .brand-logo {
+        width: min(78vw, 280px);
       }
 
       .brand-name {
-        letter-spacing: .12em;
+        letter-spacing: 0.11em;
       }
 
       .age {
-        letter-spacing: .3em;
+        letter-spacing: 0.3em;
       }
 
-      .lux-button, .lux-link {
-        font-size: .78rem;
-        letter-spacing: .08em;
+      .quote {
+        letter-spacing: 0.055em;
+        font-size: 1.16rem;
+      }
+
+      .carousel-shell {
+        border-radius: 24px;
+        padding: 6px;
+      }
+
+      .carousel,
+      .slide img,
+      .slide::after {
+        border-radius: 18px;
+      }
+
+      .slide img {
+        height: 430px;
+      }
+
+      .lux-button,
+      .lux-link {
+        min-height: 62px;
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        padding: 16px;
+      }
+
+      .confirm-text {
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .slide img {
+        height: 380px;
+      }
+
+      .quote {
+        font-size: 1.04rem;
       }
     }
   </style>
@@ -385,149 +747,240 @@
 
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
 
-<section class="intro" id="intro">
-  <span class="spark"></span>
-  <span class="spark"></span>
-  <span class="spark"></span>
-  <span class="spark"></span>
-  <span class="spark"></span>
-
-  <div class="envelope-stage">
-    <div class="envelope" id="envelope">
-      <div class="envelope-body"></div>
-      <div class="flap"></div>
-      <div class="seal">
-        <img src="LOGO.jpg" alt="Logo Franklin Lima">
-      </div>
+  <section class="intro" id="intro">
+    <div class="party-bg" aria-hidden="true">
+      <span class="spark" style="--left: 8%; --size: 6px; --time: 8s; --delay: -1s; --move: 24px;"></span>
+      <span class="spark" style="--left: 18%; --size: 8px; --time: 11s; --delay: -5s; --move: -38px;"></span>
+      <span class="spark" style="--left: 30%; --size: 5px; --time: 9s; --delay: -3s; --move: 28px;"></span>
+      <span class="spark" style="--left: 44%; --size: 7px; --time: 12s; --delay: -8s; --move: -30px;"></span>
+      <span class="spark" style="--left: 58%; --size: 5px; --time: 8s; --delay: -4s; --move: 36px;"></span>
+      <span class="spark" style="--left: 72%; --size: 9px; --time: 10s; --delay: -7s; --move: -22px;"></span>
+      <span class="spark" style="--left: 86%; --size: 6px; --time: 9s; --delay: -2s; --move: 30px;"></span>
+      <span class="spark" style="--left: 95%; --size: 7px; --time: 13s; --delay: -9s; --move: -40px;"></span>
     </div>
 
-    <p class="open-text">Clique para abrir</p>
-  </div>
-</section>
+    <div class="intro-content">
+      <p class="intro-title">Convite exclusivo</p>
 
-<main class="site" id="site">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Clique para abrir o convite">
+        <div class="envelope-body"></div>
+        <div class="flap"></div>
+        <div class="seal">
+          <img src="LOGO.jpg" alt="Logo Franklin Lima">
+        </div>
+      </div>
 
-  <section class="section hero">
-    <div class="brand-card">
-      <img src="LOGO.jpg" class="brand-logo" alt="Logo Franklin Lima">
-
-      <h1 class="brand-name">Franklin<br>Lima</h1>
-      <p class="age">40 anos</p>
-
-      <p class="quote">
-        Aos 40 anos você não comemora idade,
-        <span>você muda de nível.</span>
-      </p>
+      <p class="open-text" id="openText">Clique para abrir</p>
     </div>
   </section>
 
-  <section class="section carousel-section">
-    <h2 class="carousel-title">Espaço da celebração</h2>
+  <main class="site" id="site">
+    <div class="silver-particles" aria-hidden="true"></div>
 
-    <div class="carousel">
-      <div class="slide">
-        <img src="IMG1.jpg" alt="Foto 1 da festa">
+    <button class="music-control" id="musicControl" type="button" aria-label="Ativar ou pausar música">
+      ♪
+    </button>
+
+    <section class="section hero">
+      <div class="brand-card">
+        <img class="brand-logo" src="LOGO.jpg" alt="Logo Franklin Lima">
+
+        <h1 class="brand-name">Franklin<br>Lima</h1>
+        <p class="age">40 anos</p>
+
+        <div class="divider"></div>
+
+        <p class="quote">
+          Aos 40 anos você não comemora idade,
+          <span>você muda de nível.</span>
+        </p>
       </div>
+    </section>
 
-      <div class="slide">
-        <img src="IMG2.jpg" alt="Foto 2 da festa">
-      </div>
+    <section class="section carousel-section">
+      <h2 class="carousel-title">All Black Experience</h2>
 
-      <div class="slide">
-        <img src="IMG3.jpg" alt="Foto 3 da festa">
-      </div>
-    </div>
-  </section>
+      <div class="carousel-shell">
+        <div class="carousel" id="carousel">
+          <div class="slide">
+            <img src="IMG4.png" alt="Foto do Espaço Loop 1">
+          </div>
 
-  <section class="section actions">
+          <div class="slide">
+            <img src="IMG5.png" alt="Foto do Espaço Loop 2">
+          </div>
 
-    <div>
-      <button class="lux-button" data-target="datePanel">
-        📅 Ver data e horário
-      </button>
-
-      <div class="panel" id="datePanel">
-        <div class="panel-inner">
-          <div class="info-card">
-            <h2>Sexta feira</h2>
-            <p>22 de Janeiro de 2027<br>às 21:30</p>
+          <div class="slide">
+            <img src="IMG6.png" alt="Foto do Espaço Loop 3">
           </div>
         </div>
       </div>
-    </div>
 
-    <div>
-      <button class="lux-button" data-target="locationPanel">
-        📍 Ver localização
-      </button>
+      <div class="carousel-nav">
+        <button class="dot active" type="button" data-slide="0" aria-label="Ver foto 1"></button>
+        <button class="dot" type="button" data-slide="1" aria-label="Ver foto 2"></button>
+        <button class="dot" type="button" data-slide="2" aria-label="Ver foto 3"></button>
+      </div>
 
-      <div class="panel" id="locationPanel">
-        <div class="panel-inner">
-          <div class="info-card">
-            <h2>Espaço Loop</h2>
-            <p>
-              Rua das Figueiras, 1382<br>
-              Jardim Santo André<br>
-              São Paulo - SP
-            </p>
+      <p class="swipe-hint">Deslize para os lados</p>
+    </section>
+
+    <section class="section actions">
+
+      <div>
+        <button class="lux-button" type="button" data-target="datePanel">
+          📅 Ver data e horário
+        </button>
+
+        <div class="panel" id="datePanel">
+          <div class="panel-inner">
+            <div class="info-card">
+              <h2>Sexta feira</h2>
+              <p>
+                22 de Janeiro de 2027<br>
+                às 21:30
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="info-card">
-      <p class="confirm-text">
-        Para confirmar sua presença,<br>
-        clique no link abaixo
-      </p>
+      <div>
+        <button class="lux-button" type="button" data-target="locationPanel">
+          📍 Ver localização
+        </button>
 
-      <a class="lux-link" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSerS-LSqv72chArgnkmYsnRAfYn8fqylcsiCO5ytNcBB6amTg/viewform?usp=publish-editor">
-        Confirmar presença
-      </a>
-    </div>
+        <div class="panel" id="locationPanel">
+          <div class="panel-inner">
+            <div class="info-card">
+              <h2>Espaço Loop</h2>
+              <p>
+                Rua das Figueiras, 1382<br>
+                Jardim Santo André<br>
+                São Paulo - SP
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <a class="lux-link" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSerS-LSqv72chArgnkmYsnRAfYn8fqylcsiCO5ytNcBB6amTg/viewform?usp=publish-editor">
-      Veja minha lista de presentes 🤍
-    </a>
+      <div class="confirm-box">
+        <p class="confirm-text">
+          Para confirmar sua presença,<br>
+          clique no link abaixo
+        </p>
 
-  </section>
-</main>
+        <a class="lux-link" href="https://docs.google.com/forms/d/e/1FAIpQLSerS-LSqv72chArgnkmYsnRAfYn8fqylcsiCO5ytNcBB6amTg/viewform?usp=publish-editor" target="_blank">
+          Confirmar presença
+        </a>
 
-<script>
-  const envelope = document.getElementById("envelope");
-  const intro = document.getElementById("intro");
-  const site = document.getElementById("site");
-  const bgMusic = document.getElementById("bgMusic");
+        <a class="lux-link gift-link" href="https://sites.icasei.com.br/fran40anos/pages/37787393" target="_blank">
+          Veja minha lista de presentes 🤍
+        </a>
+      </div>
 
-  function openSite() {
-    envelope.classList.add("open");
+    </section>
 
-    setTimeout(() => {
-      intro.classList.add("hide");
-      site.classList.add("show");
+    <footer class="footer">
+      Franklin Lima • 40 anos • All Black
+    </footer>
+  </main>
 
-      bgMusic.volume = 0.22;
-      bgMusic.play().catch(() => {
-        console.log("O navegador bloqueou o autoplay até interação do usuário.");
-      });
-    }, 1000);
-  }
+  <script>
+    const intro = document.getElementById("intro");
+    const site = document.getElementById("site");
+    const envelope = document.getElementById("envelope");
+    const openText = document.getElementById("openText");
+    const bgMusic = document.getElementById("bgMusic");
+    const musicControl = document.getElementById("musicControl");
 
-  envelope.addEventListener("click", openSite);
+    let opened = false;
+    let musicPlaying = false;
 
-  document.querySelector(".open-text").addEventListener("click", openSite);
+    function playMusic() {
+      bgMusic.volume = 0.18;
 
-  document.querySelectorAll("[data-target]").forEach(button => {
-    button.addEventListener("click", () => {
-      const panel = document.getElementById(button.dataset.target);
-      panel.classList.toggle("open");
+      bgMusic.play()
+        .then(() => {
+          musicPlaying = true;
+          musicControl.textContent = "❚❚";
+        })
+        .catch(() => {
+          musicPlaying = false;
+          musicControl.textContent = "♪";
+        });
+    }
+
+    function openInvitation() {
+      if (opened) return;
+      opened = true;
+
+      envelope.classList.add("open");
+
+      setTimeout(() => {
+        intro.classList.add("hide");
+        site.classList.add("show");
+        playMusic();
+      }, 1050);
+    }
+
+    envelope.addEventListener("click", openInvitation);
+    openText.addEventListener("click", openInvitation);
+
+    envelope.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openInvitation();
+      }
     });
-  });
-</script>
+
+    musicControl.addEventListener("click", () => {
+      if (bgMusic.paused) {
+        playMusic();
+      } else {
+        bgMusic.pause();
+        musicPlaying = false;
+        musicControl.textContent = "♪";
+      }
+    });
+
+    document.querySelectorAll("[data-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const panel = document.getElementById(button.dataset.target);
+        panel.classList.toggle("open");
+      });
+    });
+
+    const carousel = document.getElementById("carousel");
+    const dots = document.querySelectorAll(".dot");
+
+    function goToSlide(index) {
+      const width = carousel.clientWidth;
+
+      carousel.scrollTo({
+        left: width * index,
+        behavior: "smooth"
+      });
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        goToSlide(Number(dot.dataset.slide));
+      });
+    });
+
+    carousel.addEventListener("scroll", () => {
+      const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    });
+  </script>
 
 </body>
 </html>
