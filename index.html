@@ -37,7 +37,10 @@
       display: none;
     }
 
-    /* TELA INICIAL DA CARTA */
+    /* =======================
+       TELA INICIAL / CARTA
+    ======================= */
+
     .intro {
       position: fixed;
       inset: 0;
@@ -235,7 +238,10 @@
       }
     }
 
-    /* SITE PRINCIPAL */
+    /* =======================
+       SITE PRINCIPAL
+    ======================= */
+
     .site {
       min-height: 100vh;
       opacity: 0;
@@ -400,7 +406,10 @@
       text-shadow: 0 0 26px rgba(255,255,255,0.35);
     }
 
-    /* CARROSSEL */
+    /* =======================
+       CARROSSEL
+    ======================= */
+
     .carousel-section {
       padding-top: 20px;
     }
@@ -453,7 +462,7 @@
       object-fit: cover;
       display: block;
       border-radius: 24px;
-      filter: brightness(0.88) contrast(1.1) saturate(0.96);
+      filter: brightness(0.9) contrast(1.08) saturate(1);
     }
 
     .slide::after {
@@ -462,8 +471,8 @@
       inset: 0;
       border-radius: 24px;
       background:
-        linear-gradient(to top, rgba(0,0,0,0.42), transparent 42%),
-        linear-gradient(to bottom, rgba(0,0,0,0.22), transparent 30%);
+        linear-gradient(to top, rgba(0,0,0,0.35), transparent 42%),
+        linear-gradient(to bottom, rgba(0,0,0,0.18), transparent 30%);
       pointer-events: none;
     }
 
@@ -499,7 +508,10 @@
       font-size: 0.72rem;
     }
 
-    /* BOTÕES */
+    /* =======================
+       BOTÕES E INFORMAÇÕES
+    ======================= */
+
     .actions {
       max-width: 680px;
       margin: 0 auto;
@@ -650,7 +662,10 @@
       text-transform: uppercase;
     }
 
-    /* MOBILE */
+    /* =======================
+       RESPONSIVO MOBILE
+    ======================= */
+
     @media (max-width: 540px) {
       .intro-content {
         width: min(94vw, 390px);
@@ -747,8 +762,8 @@
 
 <body>
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="musica.mp3" type="audio/mpeg">
+  <audio id="bgMusic" loop preload="auto" playsinline>
+    <source src="./musica.mp3" type="audio/mpeg">
   </audio>
 
   <section class="intro" id="intro">
@@ -770,7 +785,7 @@
         <div class="envelope-body"></div>
         <div class="flap"></div>
         <div class="seal">
-          <img src="LOGO.jpg" alt="Logo Franklin Lima">
+          <img src="./LOGO.jpg" alt="Logo Franklin Lima">
         </div>
       </div>
 
@@ -787,7 +802,7 @@
 
     <section class="section hero">
       <div class="brand-card">
-        <img class="brand-logo" src="LOGO.jpg" alt="Logo Franklin Lima">
+        <img class="brand-logo" src="./LOGO.jpg" alt="Logo Franklin Lima">
 
         <h1 class="brand-name">Franklin<br>Lima</h1>
         <p class="age">40 anos</p>
@@ -807,15 +822,15 @@
       <div class="carousel-shell">
         <div class="carousel" id="carousel">
           <div class="slide">
-            <img src="IMG4.png" alt="Foto do Espaço Loop 1">
+            <img src="./IMG4.png" alt="Foto do Espaço Loop 1">
           </div>
 
           <div class="slide">
-            <img src="IMG5.png" alt="Foto do Espaço Loop 2">
+            <img src="./IMG5.png" alt="Foto do Espaço Loop 2">
           </div>
 
           <div class="slide">
-            <img src="IMG6.png" alt="Foto do Espaço Loop 3">
+            <img src="./IMG6.png" alt="Foto do Espaço Loop 3">
           </div>
         </div>
       </div>
@@ -899,18 +914,17 @@
     const musicControl = document.getElementById("musicControl");
 
     let opened = false;
-    let musicPlaying = false;
 
     function playMusic() {
-      bgMusic.volume = 0.18;
+      bgMusic.volume = 1.0;
+      bgMusic.muted = false;
 
       bgMusic.play()
         .then(() => {
-          musicPlaying = true;
           musicControl.textContent = "❚❚";
         })
-        .catch(() => {
-          musicPlaying = false;
+        .catch((error) => {
+          console.log("A música não tocou. Verifique se o arquivo musica.mp3 existe no GitHub.", error);
           musicControl.textContent = "♪";
         });
     }
@@ -919,12 +933,15 @@
       if (opened) return;
       opened = true;
 
+      // Música começa exatamente no clique da carta
+      playMusic();
+
+      // Carta abre
       envelope.classList.add("open");
 
       setTimeout(() => {
         intro.classList.add("hide");
         site.classList.add("show");
-        playMusic();
       }, 1050);
     }
 
@@ -940,10 +957,18 @@
 
     musicControl.addEventListener("click", () => {
       if (bgMusic.paused) {
-        playMusic();
+        bgMusic.volume = 1.0;
+        bgMusic.muted = false;
+
+        bgMusic.play()
+          .then(() => {
+            musicControl.textContent = "❚❚";
+          })
+          .catch((error) => {
+            console.log("Não foi possível tocar a música.", error);
+          });
       } else {
         bgMusic.pause();
-        musicPlaying = false;
         musicControl.textContent = "♪";
       }
     });
