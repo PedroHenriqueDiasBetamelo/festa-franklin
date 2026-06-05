@@ -412,6 +412,7 @@
 
     .carousel-section {
       padding-top: 20px;
+      padding-bottom: 34px;
     }
 
     .carousel-title {
@@ -509,6 +510,54 @@
     }
 
     /* =======================
+       TEXTO DO CONVITE
+    ======================= */
+
+    .invite-section {
+      padding-top: 28px;
+      padding-bottom: 34px;
+    }
+
+    .invite-card {
+      width: min(100%, 780px);
+      margin: 0 auto;
+      border-radius: 30px;
+      padding: 32px 24px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025)),
+        rgba(0,0,0,0.54);
+      box-shadow:
+        0 24px 70px rgba(0,0,0,0.58),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      text-align: center;
+    }
+
+    .invite-card h2 {
+      font-family: "Cinzel", serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: clamp(1.15rem, 5vw, 2rem);
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 22px rgba(255,255,255,0.2);
+    }
+
+    .invite-card p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      letter-spacing: 0.04em;
+      font-size: 0.98rem;
+      margin-bottom: 14px;
+    }
+
+    .invite-card strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* =======================
        BOTÕES E INFORMAÇÕES
     ======================= */
 
@@ -574,15 +623,20 @@
       overflow: hidden;
     }
 
-    .info-card {
+    .info-card,
+    .cta-card {
       margin-top: 14px;
       border-radius: 26px;
       padding: 28px 22px;
       text-align: center;
       border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.055);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)),
+        rgba(0,0,0,0.52);
       backdrop-filter: blur(12px);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
     }
 
     .info-card h2 {
@@ -600,31 +654,23 @@
       font-size: 0.98rem;
     }
 
-    .confirm-box {
-      border-radius: 28px;
-      padding: 30px 20px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.18);
-      background:
-        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
-        rgba(0,0,0,0.48);
-      box-shadow:
-        0 25px 70px rgba(0,0,0,0.5),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
+    .cta-card {
+      margin-top: 0;
+      padding: 24px 20px;
     }
 
-    .confirm-text {
-      font-family: "Cinzel", serif;
-      text-transform: uppercase;
-      letter-spacing: 0.11em;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.84);
-      font-size: 0.92rem;
-      margin-bottom: 18px;
+    .gift-note {
+      margin-top: 18px;
+      font-family: "Montserrat", sans-serif;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      letter-spacing: 0.04em;
     }
 
-    .gift-link {
-      margin-top: 14px;
+    .gift-note strong {
+      color: #fff;
+      font-weight: 600;
     }
 
     .music-control {
@@ -720,6 +766,10 @@
         font-size: 1.16rem;
       }
 
+      .carousel-section {
+        padding-bottom: 20px;
+      }
+
       .carousel-shell {
         border-radius: 24px;
         padding: 6px;
@@ -735,6 +785,25 @@
         height: 430px;
       }
 
+      .invite-section {
+        padding-top: 18px;
+        padding-bottom: 24px;
+      }
+
+      .invite-card {
+        padding: 28px 20px;
+        border-radius: 24px;
+      }
+
+      .invite-card h2 {
+        letter-spacing: 0.13em;
+      }
+
+      .invite-card p {
+        font-size: 0.9rem;
+        line-height: 1.78;
+      }
+
       .lux-button,
       .lux-link {
         min-height: 62px;
@@ -743,8 +812,9 @@
         padding: 16px;
       }
 
-      .confirm-text {
-        font-size: 0.78rem;
+      .gift-note {
+        font-size: 0.84rem;
+        line-height: 1.7;
       }
     }
 
@@ -763,7 +833,7 @@
 <body>
 
   <audio id="bgMusic" loop preload="auto" playsinline>
-    <source src="./musica.mp3" type="audio/mpeg">
+    <source src="./musica.mp3?v=7" type="audio/mpeg">
   </audio>
 
   <section class="intro" id="intro">
@@ -844,6 +914,29 @@
       <p class="swipe-hint">Deslize para os lados</p>
     </section>
 
+    <section class="section invite-section">
+      <div class="invite-card">
+        <h2>Uma noite para viver</h2>
+
+        <p>
+          Você é meu convidado para celebrar uma fase especial, intensa e cheia de significado.
+          A noite foi pensada para reunir pessoas queridas em uma experiência elegante,
+          descontraída e com aquela energia boa que transforma qualquer encontro em memória.
+        </p>
+
+        <p>
+          O espaço contará com <strong>pista de dança</strong>, muita música, brindes,
+          risadas, fotos e momentos para guardar no coração — tudo com a energia contagiante
+          do <strong>Franklin</strong> que todo mundo conhece.
+        </p>
+
+        <p>
+          Para o conforto de todos, o espaço também contará com <strong>chapelaria</strong>
+          e uma estrutura preparada para receber cada convidado com cuidado, estilo e carinho.
+        </p>
+      </div>
+    </section>
+
     <section class="section actions">
 
       <div>
@@ -883,19 +976,21 @@
         </div>
       </div>
 
-      <div class="confirm-box">
-        <p class="confirm-text">
-          Para confirmar sua presença,<br>
-          clique no link abaixo
-        </p>
-
+      <div class="cta-card">
         <a class="lux-link" href="https://docs.google.com/forms/d/e/1FAIpQLSerS-LSqv72chArgnkmYsnRAfYn8fqylcsiCO5ytNcBB6amTg/viewform?usp=publish-editor" target="_blank">
           Confirmar presença
         </a>
+      </div>
 
-        <a class="lux-link gift-link" href="https://sites.icasei.com.br/fran40anos/pages/37787393" target="_blank">
+      <div class="cta-card">
+        <a class="lux-link" href="https://sites.icasei.com.br/fran40anos/pages/37787393" target="_blank">
           Veja minha lista de presentes 🤍
         </a>
+
+        <p class="gift-note">
+          Para quem desejar, deixei esse link como opção de contribuição para a minha próxima aventura.
+          E para os fãs de presentes físicos, serão recebidos com muito carinho no dia da celebração.
+        </p>
       </div>
 
     </section>
@@ -915,28 +1010,26 @@
 
     let opened = false;
 
-    function playMusic() {
-      bgMusic.volume = 1.0;
-      bgMusic.muted = false;
+    async function playMusic() {
+      try {
+        bgMusic.volume = 1.0;
+        bgMusic.muted = false;
+        bgMusic.currentTime = 0;
 
-      bgMusic.play()
-        .then(() => {
-          musicControl.textContent = "❚❚";
-        })
-        .catch((error) => {
-          console.log("A música não tocou. Verifique se o arquivo musica.mp3 existe no GitHub.", error);
-          musicControl.textContent = "♪";
-        });
+        await bgMusic.play();
+
+        musicControl.textContent = "❚❚";
+      } catch (error) {
+        console.log("A música não tocou. Verifique se o arquivo musica.mp3 existe no GitHub e se está em MB.", error);
+        musicControl.textContent = "▶";
+      }
     }
 
     function openInvitation() {
       if (opened) return;
       opened = true;
 
-      // Música começa exatamente no clique da carta
       playMusic();
-
-      // Carta abre
       envelope.classList.add("open");
 
       setTimeout(() => {
@@ -955,21 +1048,12 @@
       }
     });
 
-    musicControl.addEventListener("click", () => {
+    musicControl.addEventListener("click", async () => {
       if (bgMusic.paused) {
-        bgMusic.volume = 1.0;
-        bgMusic.muted = false;
-
-        bgMusic.play()
-          .then(() => {
-            musicControl.textContent = "❚❚";
-          })
-          .catch((error) => {
-            console.log("Não foi possível tocar a música.", error);
-          });
+        await playMusic();
       } else {
         bgMusic.pause();
-        musicControl.textContent = "♪";
+        musicControl.textContent = "▶";
       }
     });
 
