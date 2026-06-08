@@ -515,10 +515,11 @@
 
     .invite-section {
       padding-top: 28px;
-      padding-bottom: 34px;
+      padding-bottom: 26px;
     }
 
-    .invite-card {
+    .invite-card,
+    .dress-card {
       width: min(100%, 780px);
       margin: 0 auto;
       border-radius: 30px;
@@ -534,7 +535,8 @@
       text-align: center;
     }
 
-    .invite-card h2 {
+    .invite-card h2,
+    .dress-card h2 {
       font-family: "Cinzel", serif;
       text-transform: uppercase;
       letter-spacing: 0.18em;
@@ -544,7 +546,8 @@
       text-shadow: 0 0 22px rgba(255,255,255,0.2);
     }
 
-    .invite-card p {
+    .invite-card p,
+    .dress-card p {
       color: rgba(255,255,255,0.78);
       line-height: 1.85;
       letter-spacing: 0.04em;
@@ -552,9 +555,31 @@
       margin-bottom: 14px;
     }
 
-    .invite-card strong {
+    .invite-card strong,
+    .dress-card strong {
       color: #fff;
       font-weight: 600;
+    }
+
+    /* =======================
+       DRESS CODE
+    ======================= */
+
+    .dress-section {
+      padding-top: 20px;
+      padding-bottom: 34px;
+    }
+
+    .dress-card {
+      border-color: rgba(255,255,255,0.26);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.13), transparent 36%),
+        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        rgba(0,0,0,0.58);
+    }
+
+    .dress-card h2 {
+      margin-bottom: 16px;
     }
 
     /* =======================
@@ -785,21 +810,25 @@
         height: 430px;
       }
 
-      .invite-section {
+      .invite-section,
+      .dress-section {
         padding-top: 18px;
         padding-bottom: 24px;
       }
 
-      .invite-card {
+      .invite-card,
+      .dress-card {
         padding: 28px 20px;
         border-radius: 24px;
       }
 
-      .invite-card h2 {
+      .invite-card h2,
+      .dress-card h2 {
         letter-spacing: 0.13em;
       }
 
-      .invite-card p {
+      .invite-card p,
+      .dress-card p {
         font-size: 0.9rem;
         line-height: 1.78;
       }
@@ -833,7 +862,7 @@
 <body>
 
   <audio id="bgMusic" loop preload="auto" playsinline>
-    <source src="./musica.mp3?v=7" type="audio/mpeg">
+    <source src="./musica.mp3?v=8" type="audio/mpeg">
   </audio>
 
   <section class="intro" id="intro">
@@ -937,6 +966,17 @@
       </div>
     </section>
 
+    <section class="section dress-section">
+      <div class="dress-card">
+        <h2>🖤 All Black Experience</h2>
+
+        <p>
+          Para viver a experiência completa dos meus <strong>40 anos</strong>,
+          o traje <strong>preto é obrigatório</strong>.
+        </p>
+      </div>
+    </section>
+
     <section class="section actions">
 
       <div>
@@ -977,13 +1017,13 @@
       </div>
 
       <div class="cta-card">
-        <a class="lux-link" href="https://docs.google.com/forms/d/e/1FAIpQLSerS-LSqv72chArgnkmYsnRAfYn8fqylcsiCO5ytNcBB6amTg/viewform?usp=publish-editor" target="_blank">
+        <a class="lux-link" href="https://docs.google.com/forms/d/e/1FAIpQLSerS-LSqv72chArgnkmYsnRAfYn8fqylcsiCO5ytNcBB6amTg/viewform?usp=publish-editor" target="_blank" rel="noopener">
           Confirmar presença
         </a>
       </div>
 
       <div class="cta-card">
-        <a class="lux-link" href="https://sites.icasei.com.br/fran40anos/pages/37787393" target="_blank">
+        <a class="lux-link" href="https://sites.icasei.com.br/fran40anos/pages/37787393" target="_blank" rel="noopener">
           Veja minha lista de presentes 🤍
         </a>
 
@@ -1020,7 +1060,7 @@
 
         musicControl.textContent = "❚❚";
       } catch (error) {
-        console.log("A música não tocou. Verifique se o arquivo musica.mp3 existe no GitHub e se está em MB.", error);
+        console.log("A música não tocou. Verifique se o arquivo musica.mp3 está correto no GitHub.", error);
         musicControl.textContent = "▶";
       }
     }
